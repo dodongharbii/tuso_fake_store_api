@@ -6,6 +6,8 @@ import '../services/api_service.dart';
 class AllCategoryScreen extends StatelessWidget {
   const AllCategoryScreen({Key? key}) : super(key: key);
 
+  ApiService service = ApiService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +17,7 @@ class AllCategoryScreen extends StatelessWidget {
         backgroundColor: Colors.red,
       ),
       body: FutureBuilder(
-        future: getAllCategories(),
+        future: service.getAllCategories(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
