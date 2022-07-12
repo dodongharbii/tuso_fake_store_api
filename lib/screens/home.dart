@@ -66,15 +66,14 @@ class HomeScreen extends StatelessWidget {
                     ),
                     subtitle: Text('\$${product.price}'),
                     //subtitle: Text('\$price'),
-                    onTap: () {},
-                    // onTap: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (_) => ProductDetailScreen(id: product.id!),
-                    //     ),
-                    //   );
-                    // },
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ProductDetailScreen(id: index+1),
+                        ),
+                      );
+                    },
                   );
                 }),
               );
