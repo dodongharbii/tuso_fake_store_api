@@ -31,13 +31,12 @@ class HomeScreen extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
-            // onPressed: () => Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (_) => CartScreen(),
-            //   ),
-            // ),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CartScreen(),
+              ),
+            ),
           ),
         ],
       ),
