@@ -1,6 +1,6 @@
 class Products {
-  int productId;
-  int quantity;
+  int? productId;
+  int? quantity;
 
-  Products({required this.productId, required this.quantity});
+  Products({this.productId, this.quantity});
 }
