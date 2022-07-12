@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   ApiService get service => GetIt.I<ApiService>();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,25 +22,27 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.redAccent,
         actions: [
           IconButton(
-              icon: const Icon(Icons.view_list),
-              onPressed: () =>
-                  {} /*Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => AllCategoryScreen()),
-            ),*/
-              ),
+            icon: const Icon(Icons.view_list),
+            onPressed: () {},
+            // onPressed: () => Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (_) => AllCategoryScreen()),
+            // ),
+          ),
           IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const CartScreen(),
-              ),
-            ),
+            onPressed: () {},
+            // onPressed: () => Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (_) => CartScreen(),
+            //   ),
+            // ),
           ),
         ],
       ),
       body: Center(
+        //child: const Text('Go'),
         child: FutureBuilder(
             future: service.getAllProducts(),
             builder: (_, AsyncSnapshot<List<Product>> snapshot) {
@@ -48,28 +51,31 @@ class HomeScreen extends StatelessWidget {
               }
               final products = snapshot.data!;
               return ListView.separated(
-                separatorBuilder: (_, __) => const Divider(thickness: 1),
+                separatorBuilder: (_,__) => const Divider(thickness: 1),
                 itemCount: products.length,
                 itemBuilder: ((context, index) {
                   final product = snapshot.data![index];
                   return ListTile(
-                      title: Text(product.title![index]),
-                      leading: Image.network(
-                        product.image![index],
-                        height: 50,
-                        width: 50,
-                      ),
-                      subtitle: Text(product.price.toString()[index]),
-                      onTap:
-                          () {} /*{
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ProductDetailScreen(id: product.id!),
-                        ),
-                      );
-                    },*/
-                      );
+                    title: Text(product.title!),
+                    //title: Text('title'),
+                    leading: Image.network(
+                       product.image ?? '',
+                      //'https://i.pravatar.cc',
+                      height: 50,
+                      width: 50,
+                    ),
+                    subtitle: Text('\$${product.price}'),
+                    //subtitle: Text('\$price'),
+                    onTap: () {},
+                    // onTap: () {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (_) => ProductDetailScreen(id: product.id!),
+                    //     ),
+                    //   );
+                    // },
+                  );
                 }),
               );
             }),
