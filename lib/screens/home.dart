@@ -7,7 +7,9 @@ import 'cart_screen.dart';
 import 'product_detail.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
+  ApiService service = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.view_list),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const AllCategoryScreen()),
+              MaterialPageRoute(builder: (_) => AllCategoryScreen()),
             ),
           ),
           IconButton(
@@ -37,7 +39,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: FutureBuilder(
-            future: getAllProducts(),
+            future: service.getAllProducts(),
             builder: (_, AsyncSnapshot<List<Product>> snapshot) {
               if (!snapshot.hasData) {
                 return const CircularProgressIndicator();
