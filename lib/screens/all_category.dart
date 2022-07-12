@@ -1,10 +1,10 @@
-import 'package:fake_store/screens/products_by_category.dart';
+import 'package:tuso_fake_store_api/screens/products_by_category.dart';
 import 'package:flutter/material.dart';
 
 import '../services/api_service.dart';
 
 class AllCategoryScreen extends StatelessWidget {
-  const AllCategoryScreen({Key? key}) : super(key: key);
+  AllCategoryScreen({Key? key}) : super(key: key);
 
   ApiService service = ApiService();
 
