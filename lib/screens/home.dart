@@ -51,9 +51,9 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: ((context, index) {
                   final product = snapshot.data![index];
                   return ListTile(
-                    title: Text(product.title[index]),
+                    title: Text(product.title![index]),
                     leading: Image.network(
-                      product.image[index],
+                      product.image![index],
                       height: 50,
                       width: 50,
                     ),
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => ProductDetailScreen(id: product.id),
+                          builder: (_) => ProductDetailScreen(id: product.id!),
                         ),
                       );
                     },

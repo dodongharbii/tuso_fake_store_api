@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:tuso_fake_store_api/models/product.dart';
+import 'package:tuso_fake_store_api/models/products.dart';
 
 class ApiService {
   static const String baseUrl = 'https://fakestoreapi.com';
@@ -30,6 +31,17 @@ class ApiService {
         }
       }
       return products;
+    }).catchError((err) => print(err));
+  }
+
+  Future<Product> getProduct(int id) async {
+    return http.get(Uri.parse('$baseUrl/products/$id')).then((data) {
+      Product product = Product();
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        product = Product.fromJson(jsonData);
+      }
+      return product;
     }).catchError((err) => print(err));
   }
 }

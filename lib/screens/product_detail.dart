@@ -7,6 +7,8 @@ class ProductDetailScreen extends StatelessWidget {
   int id;
   ProductDetailScreen({Key? key, required this.id}) : super(key: key);
 
+  ApiService service = ApiService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,7 @@ class ProductDetailScreen extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.all(20),
         child: FutureBuilder(
-          future: getProduct(id),
+          future: service.getProduct(id),
           builder: (BuildContext context, AsyncSnapshot<Product?> snapshot) {
             if (!snapshot.hasData) {
               return const Center(child: CircularProgressIndicator());
@@ -41,13 +43,13 @@ class ProductDetailScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 30),
                   Image.network(
-                    '[image]',
+                    product.image!,
                     height: 200,
                     width: double.infinity,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    '\$$price',
+                    product.price.toString(),
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -55,14 +57,14 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    product.title,
+                    product.title!,
                     style: const TextStyle(
                       fontSize: 25,
                     ),
                   ),
                   Chip(
                     label: Text(
-                      '[category]',
+                      product.category!,
                       style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,
@@ -71,7 +73,7 @@ class ProductDetailScreen extends StatelessWidget {
                     backgroundColor: Colors.blueGrey,
                   ),
                   const SizedBox(height: 30),
-                  Text(product.description),
+                  Text(product.description!),
                 ],
               ),
             );
