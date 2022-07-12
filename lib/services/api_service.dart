@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+import 'package:tuso_fake_store_api/models/cart.dart';
 import 'dart:convert';
 
 import 'package:tuso_fake_store_api/models/product.dart';
@@ -42,6 +43,17 @@ class ApiService {
         product = Product.fromJson(jsonData);
       }
       return product;
+    }).catchError((err) => print(err));
+  }
+
+  Future<Cart?> getCart(int userId) async {
+    return http.get(Uri.parse('$baseUrl/carts/$userId')).then((data) {
+      Cart cart = Cart();
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        cart = Cart.fromJson(jsonData);
+      }
+      return cart;
     }).catchError((err) => print(err));
   }
 }
