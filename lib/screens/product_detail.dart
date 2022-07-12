@@ -4,7 +4,8 @@ import '../models/product.dart';
 import '../services/api_service.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({Key? key, required this.id}) : super(key: key);
+  int id;
+  ProductDetailScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -51,18 +51,18 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: ((context, index) {
                   final product = snapshot.data![index];
                   return ListTile(
-                    title: Text('[title]'),
+                    title: Text(product.title[index]),
                     leading: Image.network(
-                      '[image]',
+                      product.image[index],
                       height: 50,
                       width: 50,
                     ),
-                    subtitle: Text('\$price}'),
+                    subtitle: Text(product.price.toString()[index]),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => ProductDetailScreen(),
+                          builder: (_) => ProductDetailScreen(id: product.id),
                         ),
                       );
                     },
