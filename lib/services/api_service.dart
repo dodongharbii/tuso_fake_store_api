@@ -34,7 +34,9 @@ class ApiService {
   }
 
   Future<List<Product>> getAllProducts() async {
-    return http.get(Uri.parse('$baseUrl/products'), headers: headers).then((data) {
+    return http
+        .get(Uri.parse('$baseUrl/products'), headers: headers)
+        .then((data) {
       final products = <Product>[];
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
@@ -68,12 +70,15 @@ class ApiService {
     }).catchError((err) => print(err));
   }
 
-  Future<bool> deleteCart(String id) async {
-    return http.delete(Uri.parse('$baseUrl/carts/$id')).then((data) {
-      if (data.statusCode == 204) {
-        return true;
+  Future<void> deleteCart(String id) async {
+    return http
+        .delete(Uri.parse('$baseUrl/carts/$id'), headers: headers)
+        .then((data) {
+      if (data.statusCode == 200) {
+        final jsonData = json.decode(data.body);
+        print(data.statusCode);
+        print(jsonData);
       }
-    return false;
     }).catchError((err) => print(err));
   }
 }

@@ -62,14 +62,12 @@ class CartScreen extends StatelessWidget {
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () async {
-                        final deleteResult = await service.deleteCart('1');
-                        if (deleteResult) {
+                        await service.deleteCart('1');
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Cart deleted successfully.'),
                             ),
                           );
-                        }
                       },
                     ),
                   );
