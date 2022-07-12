@@ -38,7 +38,7 @@ class CartScreen extends StatelessWidget {
             itemBuilder: (_, index) {
               final product = products[index];
               return FutureBuilder(
-                future: service.getProduct(product.productId!),
+                future: service.getProduct(product['productId']),
                 builder: (BuildContext context,
                     AsyncSnapshot<Product?> productSnapshot) {
                   if (!productSnapshot.hasData) {
@@ -57,7 +57,7 @@ class CartScreen extends StatelessWidget {
                       height: 40,
                     ),
                     subtitle: Text(
-                      'Quantity: ${product.quantity}',
+                      'Quantity: ${product['quantity']}',
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
