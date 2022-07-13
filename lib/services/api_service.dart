@@ -10,12 +10,12 @@ class ApiService {
   static const headers = {'Content-type': 'application/json'};
 
   Future login(String username, String password) async {
-    final body = {
+    final credentials = {
       'username': username,
       'password': password,
     };
 
-    final response = await http.post(Uri.parse(baseUrl), body: body);
+    final response = await http.post(Uri.parse(baseUrl), body: credentials);
     return response.body;
   }
 
@@ -77,18 +77,21 @@ class ApiService {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
         print(data.statusCode);
-        print(jsonData);
+        print(jsonData.toString());
       }
     }).catchError((err) => print(err));
   }
 
   Future<List<Product>> getProductsByCategory(String categoryName) async {
-    return http.get(Uri.parse('$baseUrl/products/category/$categoryName'), headers: headers).then((data) {
+    return http
+        .get(Uri.parse('$baseUrl/products/category/$categoryName'),
+            headers: headers)
+        .then((data) {
       final products = <Product>[];
-      if(data.statusCode == 200) {
+      if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
-        for(var item in jsonData) {
-          if(item['category'] == categoryName) {
+        for (var item in jsonData) {
+          if (item['category'] == categoryName) {
             products.add(Product.fromJson(item));
           }
         }
@@ -102,7 +105,10 @@ class ApiService {
         CartUpdate(userId: cartId, date: DateTime.now(), products: [
       {'productId': productId, 'quantity': 1}
     ]);
-    return http.put(Uri.parse('$baseUrl/carts/$cartId'), headers: headers,  body: json.encode(cartUpdate.toJson())).then((data) {
+    return http
+        .put(Uri.parse('$baseUrl/carts/$cartId'),
+            headers: headers, body: json.encode(cartUpdate.toJson()))
+        .then((data) {
       if (data.statusCode == 200) {
         final jsonData = json.decode(data.body);
         print(data.statusCode);
